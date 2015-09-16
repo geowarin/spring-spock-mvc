@@ -5,3 +5,4 @@
 # gradle
 .gradle/
 build/
+settings.gradle
