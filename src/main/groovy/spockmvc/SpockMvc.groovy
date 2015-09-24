@@ -21,8 +21,24 @@ class SpockMvc {
     spockMvc(MockMvcRequestBuilders.delete(url), params)
   }
 
-  SpockMvcResult put(String url, RequestParams params = [:]) {
-    spockMvc(MockMvcRequestBuilders.put(url), params)
+  SpockMvcResult put(String url, def data = null, RequestParams params = [:]) {
+    def builder = MockMvcRequestBuilders.put(url)
+    if (data) {
+      builder
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(JsonOutput.toJson(data))
+    }
+    spockMvc(builder, params)
+  }
+
+  SpockMvcResult patch(String url, def data = null, RequestParams params = [:]) {
+    def builder = MockMvcRequestBuilders.patch(url)
+    if (data) {
+      builder
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(JsonOutput.toJson(data))
+    }
+    spockMvc(builder, params)
   }
 
   SpockMvcResult options(String url, RequestParams params = [:]) {
