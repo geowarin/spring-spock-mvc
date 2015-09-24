@@ -12,7 +12,7 @@ allprojects {
 }
 
 group 'com.geowarin'
-version '0.2'
+version '0.2.1'
 
 sourceCompatibility = 1.5
 
@@ -78,7 +78,7 @@ bintray {
     licenses = ['MIT']
     vcsUrl = 'https://github.com/geowarin/spring-spock-mvc.git'
     version {
-      name = '0.2'
+      name = '0.2.1'
       desc = 'A thin layer over spring-test-mvc to make tests more spock-friendly'
     }
   }
