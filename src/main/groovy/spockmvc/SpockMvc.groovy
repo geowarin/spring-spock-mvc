@@ -21,10 +21,6 @@ class SpockMvc {
     spockMvc(MockMvcRequestBuilders.delete(url), params)
   }
 
-  SpockMvcResult put(String url, RequestParams params = [:]) {
-    spockMvc(MockMvcRequestBuilders.put(url), params)
-  }
-
   SpockMvcResult options(String url, RequestParams params = [:]) {
     spockMvc(MockMvcRequestBuilders.options(url), params)
   }
@@ -33,19 +29,22 @@ class SpockMvc {
     spockMvc(MockMvcRequestBuilders.head(url), params)
   }
 
+  SpockMvcResult put(String url, def data = null, RequestParams params = [:]) {
+    spockMvc(MockMvcRequestBuilders.put(url), params, data)
+  }
+
   SpockMvcResult post(String url, def data = null, RequestParams params = [:]) {
-    def builder = MockMvcRequestBuilders.post(url)
+    spockMvc(MockMvcRequestBuilders.post(url), params, data)
+  }
+
+  private SpockMvcResult spockMvc(MockHttpServletRequestBuilder builder, RequestParams params, data = null) {
+    if (params.authToken) {
+      builder.header('X-Auth-Token', params.authToken)
+    }
     if (data) {
       builder
         .contentType(MediaType.APPLICATION_JSON)
         .content(JsonOutput.toJson(data))
-    }
-    spockMvc(builder, params)
-  }
-
-  private SpockMvcResult spockMvc(MockHttpServletRequestBuilder builder, RequestParams params) {
-    if (params.authToken) {
-      builder.header('X-Auth-Token', params.authToken)
     }
     params.cookies.each {
       builder.cookie(it)
