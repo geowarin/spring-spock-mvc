@@ -1,0 +1,69 @@
+# Spring-spock-mvc
+
+A thin layer over spring-test-mvc to make tests more spock-friendly
+
+# Motivation
+
+Spring mvc tests are great but with their fluent looks, they are not a naturally
+fit with spock.
+
+This is why I created a very small layer to make it look nicer in groovy, using
+the capabilities of the language like JSON parsing.
+
+# Setup
+
+My recommendation is to create a base class for your specifications
+
+```groovy
+
+@ContextConfiguration(
+  loader = SpringApplicationContextLoader,
+  classes = [MyApplication]
+)
+abstract class AbstractMvcSpec extends SpockMvcSpec {
+
+  @Override
+  MockMvc buildMockMvc(WebApplicationContext wac) {
+    MockMvcBuilders.webAppContextSetup(wac).build()
+  }
+}
+```
+
+# Usage
+
+
+```groovy
+class AuthenticationSpec extends AbstractMvcSpec {
+
+  def "unauthenticated users cannot get resource"() {
+    when:
+    def res = get('/api/simple')
+
+    then:
+    res.status == HttpStatus.FORBIDDEN
+  }
+
+  def "get session"() {
+    when:
+    def res = get('/api/session', new RequestParams(authToken: 'secretToken'))
+
+    then:
+    res.status == HttpStatus.OK
+    res.json.username == 'user'
+  }
+}
+```
+
+## Availability
+
+This package is hosted on https://bintray.com/bintray/jcenter[jcenter]
+
+It is therefore available directly from a groovy grape.
+
+You can also include the `jcenter()` repository in your gradle script.
+
+Or add a bunch of XML in your pom.xml.
+
+# License
+
+MIT

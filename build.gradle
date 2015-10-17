@@ -78,7 +78,7 @@ bintray {
     licenses = ['MIT']
     vcsUrl = 'https://github.com/geowarin/spring-spock-mvc.git'
     version {
-      name = '0.2.1'
+      name = project.version
       desc = 'A thin layer over spring-test-mvc to make tests more spock-friendly'
     }
   }
