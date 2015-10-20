@@ -54,6 +54,23 @@ class AuthenticationSpec extends AbstractMvcSpec {
     res.status == HttpStatus.OK
     res.json.username == 'user'
   }
+
+  def "post example"() {
+    when:
+    def res = post('/api/session', [someData: 'data'])
+
+    then:
+    res.status == HttpStatus.OK
+    res.json.data == 'data'
+  }
+
+  def "headers example"() {
+    when:
+    def res = post('/api/session', new RequestParams(headers: ['x-auth-token': 'token']))
+
+    then:
+    res.status == HttpStatus.OK
+  }
 }
 ```
 
