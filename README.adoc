@@ -13,6 +13,9 @@ It makes tests look nicer in groovy, using the capabilities of the language like
 By separating the requests from the assertions, we can use the spock DSL
 to write beautiful assertions.
 
+Since most API use Json, the library is converting data to and from JSON directly.
+There is no support for other media types like XML.
+
 # Setup
 
 My recommendation is to create a base class for your specifications
