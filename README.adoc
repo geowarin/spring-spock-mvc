@@ -54,6 +54,20 @@ class AuthenticationSpec extends AbstractMvcSpec {
 }
 ```
 
+# Dependency
+
+This lib depends on spock and groovy.
+If you use spring-boot the dependencies versions are optional.
+
+Add the following to your build:
+
+```groovy
+compile 'org.codehaus.groovy:groovy'
+
+testCompile 'org.spockframework:spock-spring'
+testCompile 'com.geowarin:spring-spock-mvc:0.2.1'
+```
+
 ## Availability
 
 This package is hosted on https://bintray.com/bintray/jcenter[jcenter]
