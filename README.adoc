@@ -4,11 +4,14 @@ A thin layer over spring-test-mvc to make tests more spock-friendly
 
 # Motivation
 
-Spring mvc tests are great but with their fluent looks, they are not a naturally
+Spring mvc tests are great but the fluent API is not a naturally
 fit with spock.
 
-This is why I created a very small layer to make it look nicer in groovy, using
-the capabilities of the language like JSON parsing.
+This is why I created a very small layer over spring-test-mvc.
+It makes tests look nicer in groovy, using the capabilities of the language like JSON parsing.
+
+By separating the requests from the assertions, we can use the spock DSL
+to write beautiful assertions.
 
 # Setup
 
