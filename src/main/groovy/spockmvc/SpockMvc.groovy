@@ -37,6 +37,10 @@ class SpockMvc {
     spockMvc(MockMvcRequestBuilders.post(url), params, data)
   }
 
+  SpockMvcResult patch(String url, def data = null, RequestParams params = [:]) {
+    spockMvc(MockMvcRequestBuilders.patch(url), params, data)
+  }
+
   private SpockMvcResult spockMvc(MockHttpServletRequestBuilder builder, RequestParams params, data = null) {
     if (params.authToken) {
       builder.header('X-Auth-Token', params.authToken)
